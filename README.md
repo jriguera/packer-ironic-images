@@ -1,2 +1,4 @@
-# packer-images-ironic
-Creating baremetal ironic images with packer
+# packer-ironic-images
+
+Creating baremetal images with packer for Ironic deployments
+
