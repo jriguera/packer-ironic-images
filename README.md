@@ -1,7 +1,9 @@
 # packer-ironic-images
 
 Automated way to create baremetal images with packer and qemu-kvm for Openstak Ironic deployments
-Have a look https://github.com/jriguera/ansible-ironic-standalone to install Ironic server (standalone) 
+Have a look https://github.com/jriguera/ansible-ironic-standalone to install Ironic server (standalone)
+
+Those images use cloud-init with config-drive provider, in order to work with IPA (Ironic Python Agent) driver. 
 
 # Usage (on Ubuntu)
 
