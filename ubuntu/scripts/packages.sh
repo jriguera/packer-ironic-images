@@ -1,12 +1,17 @@
 #!/bin/bash -eux
 
-INSTALL_LIST="curl htop iotop tcpdump unzip vim-nox ethtool lsscsi lshw"
+INSTALL_LIST="curl wget htop iotop tcpdump unzip vim-nox ethtool lsscsi lshw
+             lsof nano parted rsync pciutils strace logrotate"
+
 UNINSTALL_LIST="pppoeconf pppconfig ppp landscape-common wireless-tools wpasupplicant"
 
 echo "* Installing packages ..."
 for package in ${INSTALL_LIST}; do
 	apt-get install -y ${package}
 done
+# Other services
+apt-get install -y rng-tools
+apt-get install -y acpid
 
 echo "* Uninstalling packages ..."
 for package in ${UNINSTALL_LIST}; do
