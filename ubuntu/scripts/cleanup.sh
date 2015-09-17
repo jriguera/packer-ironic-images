@@ -49,6 +49,10 @@ if [ -d /etc/machine-id ]; then
     rm -f /etc/machine-id
     touch /etc/machine-id
 fi
+if [ -d /var/lib/dbus/machine-id ]; then
+    rm -f /var/lib/dbus/machine-id
+    touch /var/lib/dbus/machine-id
+fi
 
 echo "* Clearing last login information"
 >/var/log/lastlog
@@ -56,7 +60,7 @@ echo "* Clearing last login information"
 >/var/log/btmp
 
 echo "* Empty log files"
-find /var/log -type f | while read f; do echo -ne '' > $f; done;
+find /var/log -type f | while read f; do echo -ne '' > "$f"; done;
 
 echo "* Cleaning up leftover dhcp leases"
 # Ubuntu 10.04
