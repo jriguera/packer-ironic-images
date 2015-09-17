@@ -1,0 +1,64 @@
+{
+    "_comment": "Centos 6.7 CD install",
+    "_comment": "ISOs: http://isoredirect.centos.org/centos/6/isos/x86_64/",
+
+    "variables": {
+        "user": "centos",
+        "password": "centos",
+        "name": "centos",
+        "version": "6.7",
+        "disk_size": "10000",
+        "headless": "true",
+        "upgrade": "no",
+        "iso_url": "http://mirror.yourwebhoster.eu/centos/6.7/isos/x86_64/CentOS-6.7-x86_64-minimal.iso", 
+        "iso_checksum": "9381a24b8bee2fed0c26896141a64b69",
+        "pressed": "6.7.ks"
+    },
+    "builders": [
+        {
+            "headless": "{{user `headless`}}",
+            "name": "centos",
+            "type": "qemu",
+            "format": "qcow2",
+            "accelerator": "kvm",
+            "disk_interface": "scsi",
+            "net_device": "e1000",
+            "disk_size": "{{user `disk_size`}}",
+            "output_directory": "output-centos-{{user `name`}}-{{user `version`}}",
+            "vm_name": "centos-{{user `name`}}-{{user `version`}}.qcow2",
+            "iso_url": "{{user `iso_url`}}",
+            "iso_checksum": "{{user `iso_checksum`}}",
+            "iso_checksum_type": "md5",
+            "http_directory": "http",
+            "ssh_wait_timeout": "1800s",
+            "ssh_username": "{{user `user`}}",
+            "ssh_password": "{{user `password`}}",
+            "shutdown_command": "echo '{{user `password`}}' | sudo -S shutdown -P now",
+            "boot_wait": "2s",
+            "boot_command": [
+                "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort}}/{{user `pressed`}}<enter>"
+            ]
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "shell",
+            "execute_command": "echo '{{user `password`}}' | {{ .Vars }} sudo -S -E sh {{ .Path }}",
+            "environment_vars": [
+                "CENTOS_USER={{user `user`}}",
+                "CENTOS_PASS={{user `password`}}",
+                "CENTOS_NAME={{user `name`}}",
+                "CENTOS_VERSION={{user `version`}}",
+                "CENTOS_UPGRADE={{user `upgrade`}}",
+                "HTTP_SERVER_URL=http://{{ .HTTPIP }}:{{ .HTTPPort }}/"
+            ],
+            "scripts": [
+                "scripts/update.sh",
+                "scripts/packages.sh",
+                "scripts/networking.sh",
+                "scripts/cloud-init.sh",                
+                "scripts/cleanup.sh"
+            ]
+        }
+    ]
+}
