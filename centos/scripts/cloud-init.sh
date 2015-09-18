@@ -84,7 +84,6 @@ cloud_init_modules:
  - rsyslog
  - users-groups
  - ssh
- - resolv-conf
 
 cloud_config_modules:
  - mounts
@@ -131,36 +130,6 @@ EOF
 ### Setup LVM PV grow
 echo "* Installing grow PV configuration"
 cat <<EOF > /etc/cloud/cloud.cfg.d/10_growpv.cfg
-# growpart entry is a dict, if it is not present at all
-# in config, then the default is used ({'mode': 'auto', 'devices': ['/']})
-#
-#  mode:
-#    values:
-#     * auto: use any option possible (any available)
-#             if none are available, do not warn, but debug.
-#     * growpart: use growpart to grow partitions
-#             if growpart is not available, this is an error.
-#     * off, false
-#
-# devices:
-#   a list of things to resize.
-#   items can be filesystem paths or devices (in /dev)
-#   examples:
-#     devices: [/, /dev/vdb1]
-#
-# ignore_growroot_disabled:
-#   a boolean, default is false.
-#   if the file /etc/growroot-disabled exists, then cloud-init will not grow
-#   the root partition.  This is to allow a single file to disable both
-#   cloud-initramfs-growroot and cloud-init's growroot support.
-#
-#   true indicates that /etc/growroot-disabled should be ignored
-#
-growpart:
-  mode: auto
-  devices: ['/dev/sda2', '/dev/vda2']
-  ignore_growroot_disabled: false
-
 # boot commands
 # default: none
 # this is very similar to runcmd, but commands run very early
@@ -171,8 +140,19 @@ growpart:
 #  * bootcmd will run on every boot
 #  * the INSTANCE_ID variable will be set to the current instance id.
 #  * you can use 'cloud-init-boot-per' command to help only run once
+
+# Centos HACK
+# 1. Network does not work with cloud-init unless network service is restarted
+# 2. partprobe and partx does not work reload the partition table
+# So, I have decided to reboot the server (only first time after installation)
+
 bootcmd:
- - [ cloud-init-per, once, pvresize, /dev/sda2, /dev/vda2 ]
+ - [ cloud-init-per, once, growpart_sda2, growpart, /dev/sda, 2 ]
+ - [ cloud-init-per, once, partx_sda, partx, -v, -a, /dev/sda ]
+ - [ cloud-init-per, once, partprobe_sda, partprobe, /dev/sda ]
+ - [ cloud-init-per, once, reboot, reboot ]
+ - [ cloud-init-per, once, reboot_sleep, sleep, 1m ]
+ - [ cloud-init-per, once, pvresize_system, pvresize, /dev/sda2 ]
 
 EOF
 
