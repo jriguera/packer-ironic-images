@@ -1,7 +1,7 @@
 #!/bin/bash -eux
 
 INSTALL_LIST="curl wget htop iotop tcpdump unzip vim-minimal ethtool lsscsi lshw
-              lsof nano parted rsync pciutils strace logrotate"
+              lsof nano parted rsync pciutils strace logrotate man man-pages"
 
 UNINSTALL_LIST="biosdevname NetworkManager polkit"
 
