@@ -91,8 +91,8 @@ rpm -qa
 
 sleep 10
 
-echo "* Flag the system for reconfiguration"
-touch /.unconfigured
+#echo "* Flag the system for reconfiguration"
+#touch /.unconfigured
 
 # Make sure we wait until all the data is written to disk, otherwise
 # Packer might quite too early before the large files are deleted
