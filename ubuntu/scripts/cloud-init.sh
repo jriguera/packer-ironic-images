@@ -183,7 +183,7 @@ growpart:
 #  * the INSTANCE_ID variable will be set to the current instance id.
 #  * you can use 'cloud-init-boot-per' command to help only run once
 bootcmd:
- - [ cloud-init-per, once, pvresize, /dev/sda2, /dev/vda2 ]
+ - [ cloud-init-per, once, pvresize_system, pvresize, /dev/sda2, /dev/vda2 ]
 
 EOF
 
