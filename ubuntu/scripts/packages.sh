@@ -1,7 +1,7 @@
 #!/bin/bash -eux
 
 INSTALL_LIST="curl wget htop iotop tcpdump unzip vim-nox ethtool lsscsi lshw
-             lsof nano parted rsync pciutils strace logrotate"
+             lsof nano parted rsync pciutils strace logrotate iftop nload"
 
 UNINSTALL_LIST="pppoeconf pppconfig ppp landscape-common wireless-tools wpasupplicant"
 
