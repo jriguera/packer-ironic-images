@@ -5,12 +5,12 @@
         "user": "ubuntu",
         "password": "ubuntu",
         "name": "trusty",
-        "version": "14.04.3",
+        "version": "14.04.4",
         "disk_size": "10000",
         "headless": "true",
         "upgrade": "no",
-        "iso_url": "http://releases.ubuntu.com/14.04/ubuntu-14.04.3-server-amd64.iso", 
-        "iso_checksum": "9e5fecc94b3925bededed0fdca1bd417",
+        "iso_url": "http://releases.ubuntu.com/14.04/ubuntu-14.04.4-server-amd64.iso", 
+        "iso_checksum": "07e4bb5569814eab41fafac882ba127893e3ff0bdb7ec931c9b2d040e3e94e7a",
         "pressed": "1404.preseed"
     },
     "builders": [
@@ -27,7 +27,7 @@
             "vm_name": "ubuntu-{{user `name`}}-{{user `version`}}.qcow2",
             "iso_url": "{{user `iso_url`}}",
             "iso_checksum": "{{user `iso_checksum`}}",
-            "iso_checksum_type": "md5",
+            "iso_checksum_type": "sha256",
             "http_directory": "http",
             "ssh_wait_timeout": "1800s",
             "ssh_username": "{{user `user`}}",
@@ -63,6 +63,10 @@
                 "scripts/cloud-init.sh",                
                 "scripts/cleanup.sh"
             ]
+        },
+        {
+            "type": "shell-local",
+            "command": "./upload.sh"
         }
     ]
 }
