@@ -63,10 +63,6 @@
                 "scripts/cloud-init.sh",                
                 "scripts/cleanup.sh"
             ]
-        },
-        {
-            "type": "shell-local",
-            "command": "./upload.sh"
         }
     ]
 }
