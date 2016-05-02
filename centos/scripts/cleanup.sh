@@ -10,10 +10,12 @@ echo "* Remove udev rules"
 rm -rf /dev/.udev/
 rm -f /etc/udev/rules.d/70-persistent-net.rules
 PRIMARY_INTERFACE=$(ip route list match 0.0.0.0 | awk 'NR==1 {print $5}')
-if [ -f /etc/sysconfig/network-scripts/ifcfg-$PRIMARY_INTERFACE ] ; then
-    sed -i "/^HWADDR/d" /etc/sysconfig/network-scripts/ifcfg-$PRIMARY_INTERFACE
-    sed -i "/^UUID/d" /etc/sysconfig/network-scripts/ifcfg-$PRIMARY_INTERFACE
-fi
+#if [ -f /etc/sysconfig/network-scripts/ifcfg-$PRIMARY_INTERFACE ] ; then
+#    sed -i "/^HWADDR/d" /etc/sysconfig/network-scripts/ifcfg-$PRIMARY_INTERFACE
+#    sed -i "/^UUID/d" /etc/sysconfig/network-scripts/ifcfg-$PRIMARY_INTERFACE
+#fi
+# Sometimes is better remove everything
+rm -f /etc/sysconfig/network-scripts/ifcfg-$PRIMARY_INTERFACE
 
 echo "* Remove temporary files"
 rm -rf /tmp/*

@@ -22,6 +22,9 @@ for package in ${UNINSTALL_LIST}; do
 	yum erase -y ${package}
 done
 
+# Installing firmware
+yum install -y bfa-firmware
+
 # Disable the release upgrader
 echo "* Disabling the release upgrader"
 [ -e /etc/yum/pluginconf.d/refresh-packagekit.conf ] && sed -i 's/^enabled=.*$/enabled=0/' /etc/yum/pluginconf.d/refresh-packagekit.conf || true
