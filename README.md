@@ -42,9 +42,11 @@ packer build  ubuntu-14.04.latest-amd64.json
 ```sh
 # Based on https://github.com/jriguera/ansible-ironic-standalone
 # the variable is baremetal_server_images_path (on the ironic role is ironic_pxe_images_path)
-md5sum output-ubuntu-14.04/trusty.qcow2 > output-ubuntu-14.04/trusty.md5
-# Copy the md5 and qcow
-scp output-ubuntu-14.04/trusty.*  IRONIC_SERVER:/var/lib/ironic/http/images/
+md5sum output-ubuntu-14.04/trusty.qcow2 > output-ubuntu-14.04/trusty.meta
+
+# Upload the meta and qcow2 files to the HTTP repository
+curl -T output-ubuntu-14.04/trusty.qcow2 http://<IRONIC-SERVER>/images/
+curl -T output-ubuntu-14.04/trusty.meta http://<IRONIC-SERVER>/images/
 ```
 
 # Author
