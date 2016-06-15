@@ -1,19 +1,19 @@
 #!/bin/bash -eux
 
 DATASOURCE_LIST="ConfigDrive, Openstack, None"
-# Comma list of choices: 
-#    NoCloud: Reads info from /var/lib/cloud/seed only, 
-#    ConfigDrive: Reads data from Openstack Config Drive, 
-#    OpenNebula: read from OpenNebula context disk, 
-#    Azure: read from MS Azure cdrom. Requires walinux-agent, 
-#    AltCloud: config disks for RHEVm and vSphere, 
-#    OVF: Reads data from OVF Transports, 
-#    MAAS: Reads data from Ubuntu MAAS, 
-#    GCE: google compute metadata service, 
-#    OpenStack: native openstack metadata service, 
-#    CloudSigma: metadata over serial for cloudsigma.com, 
-#    Ec2: reads data from EC2 Metadata service, 
-#    CloudStack: Read from CloudStack metadata service, 
+# Comma list of choices:
+#    NoCloud: Reads info from /var/lib/cloud/seed only,
+#    ConfigDrive: Reads data from Openstack Config Drive,
+#    OpenNebula: read from OpenNebula context disk,
+#    Azure: read from MS Azure cdrom. Requires walinux-agent,
+#    AltCloud: config disks for RHEVm and vSphere,
+#    OVF: Reads data from OVF Transports,
+#    MAAS: Reads data from Ubuntu MAAS,
+#    GCE: google compute metadata service,
+#    OpenStack: native openstack metadata service,
+#    CloudSigma: metadata over serial for cloudsigma.com,
+#    Ec2: reads data from EC2 Metadata service,
+#    CloudStack: Read from CloudStack metadata service,
 #    None: Failsafe datasource
 
 ### Install debconf-utils for automatic configuration
@@ -39,7 +39,7 @@ cat <<EOF > /etc/cloud/cloud.cfg
 users:
  - default
 
-# If this is set, 'root' will not be able to ssh in and they 
+# If this is set, 'root' will not be able to ssh in and they
 # will get a message to login instead as the above $user (ubuntu)
 disable_root: true
 
@@ -47,8 +47,8 @@ disable_root: true
 preserve_hostname: false
 
 # Example datasource config
-# datasource: 
-#    Ec2: 
+# datasource:
+#    Ec2:
 #      metadata_urls: [ 'blah.com' ]
 #      timeout: 5 # (defaults to 50 seconds)
 #      max_wait: 10 # (defaults to 120 seconds)
@@ -192,4 +192,3 @@ EOF
 echo "* Cleaning"
 apt-get remove -y --purge debconf-utils
 rm -f /tmp/cloud-init.preseed
-
