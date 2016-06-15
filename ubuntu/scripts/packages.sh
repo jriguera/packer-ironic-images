@@ -19,6 +19,7 @@ for package in ${UNINSTALL_LIST}; do
 done
 
 # Disable the release upgrader
-echo "* Disabling the release upgrader"
-sed -i 's/^Prompt=.*$/Prompt=never/' /etc/update-manager/release-upgrades
-
+if [ -e /etc/update-manager/release-upgrades ]; then
+	echo "* Disabling the release upgrader"
+	sed -i 's/^Prompt=.*$/Prompt=never/' /etc/update-manager/release-upgrades
+fi
