@@ -10,7 +10,7 @@
         "version": "14.04",
         "disk_size": "10000",
         "headless": "true",
-        "upgrade": "no",
+        "upgrade": "yes",
         "iso_url": "http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-amd64/current/images/netboot/mini.iso", 
         "iso_checksum": "7297321c2fa6424417a548c85edd6e98",
         "pressed": "1404.preseed"
