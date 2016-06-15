@@ -1,7 +1,7 @@
 #!/bin/bash -eux
 
 echo "* Cleaning gem cache"
-rm -rf /var/lib/gems/1.9.1/cache/*
+rm -rf /var/lib/gems/*/cache/*
 
 echo "* Cleanup apt cache"
 apt-get -y autoremove --purge
@@ -31,7 +31,7 @@ rm -rf /var/run/console/*
 rm -rf /var/run/faillock/*
 rm -rf /var/run/sepermit/*
 
-echo "* Remove package manager cache" 
+echo "* Remove package manager cache"
 find /var/cache/apt/archives/ -type f -exec rm -f {} \;
 
 echo "* Remove the process accounting log files"
@@ -63,6 +63,7 @@ echo "* Empty log files"
 find /var/log -type f | while read f; do echo -ne '' > "$f"; done;
 
 echo "* Cleaning up leftover dhcp leases"
+
 # Ubuntu 10.04
 if [ -d "/var/lib/dhcp3" ]; then
     rm /var/lib/dhcp3/*
@@ -70,7 +71,7 @@ fi
 # Ubuntu 12.04 & 14.04
 if [ -d "/var/lib/dhcp" ]; then
     rm /var/lib/dhcp/*
-fi 
+fi
 
 echo "* Remove blkid tab"
 rm -f /dev/.blkid.tab
