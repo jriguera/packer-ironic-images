@@ -9,7 +9,7 @@
         "disk_size": "10000",
         "headless": "true",
         "upgrade": "yes",
-        "iso_url": "/home/jriguera/Downloads/ubuntu-16.04-server-amd64.iso",
+        "iso_url": "http://releases.ubuntu.com/16.04/ubuntu-16.04-server-amd64.iso",
         "iso_checksum": "b8b172cbdf04f5ff8adc8c2c1b4007ccf66f00fc6a324a6da6eba67de71746f6",
         "pressed": "1604.preseed"
     },
@@ -37,7 +37,7 @@
             "shutdown_command": "echo '{{user `password`}}' | sudo -S shutdown -P now",
             "boot_wait": "2s",
             "boot_command": [
-      		"<enter><f6><enter><esc>",
+            "<enter><f6><enter><esc>",
                 "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
                 "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
                 "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
@@ -47,7 +47,7 @@
                 "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
                 "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
                 "<bs><bs><bs>",
-      		"/install/vmlinuz initrd=/install/initrd.gz noapic ",
+            "/install/vmlinuz initrd=/install/initrd.gz noapic ",
                 "locale=en_US hostname=ubuntu auto=true ",
                 "keyboard-configuration/layoutcode=us ",
                 "grub-installer/bootdev=/dev/sda ",
