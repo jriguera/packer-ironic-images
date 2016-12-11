@@ -23,6 +23,7 @@
             "disk_interface": "scsi",
             "net_device": "e1000",
             "disk_size": "{{user `disk_size`}}",
+            "disk_compression": true,
             "output_directory": "output-ubuntu-{{user `name`}}-{{user `version`}}",
             "vm_name": "ubuntu-{{user `name`}}-{{user `version`}}.qcow2",
             "iso_url": "{{user `iso_url`}}",
@@ -60,7 +61,9 @@
                 "scripts/update.sh",
                 "scripts/packages.sh",
                 "scripts/networking.sh",
-                "scripts/cloud-init.sh",                
+                "scripts/cloud-init.sh",
+                "scripts/swap.sh",
+                "scripts/grub.sh",
                 "scripts/cleanup.sh"
             ]
         }
