@@ -24,6 +24,7 @@
             "disk_interface": "scsi",
             "net_device": "e1000",
             "disk_size": "{{user `disk_size`}}",
+            "disk_compression": true,
             "output_directory": "output-centos-{{user `name`}}-{{user `version`}}",
             "vm_name": "centos-{{user `name`}}-{{user `version`}}.qcow2",
             "iso_url": "{{user `iso_url`}}",
