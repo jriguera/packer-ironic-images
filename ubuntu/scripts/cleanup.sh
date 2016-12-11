@@ -1,5 +1,8 @@
 #!/bin/bash -eux
 
+echo "* Remove fd from fstab"
+sed -i '/^\/dev\/fd0/d' /etc/fstab
+
 echo "* Cleaning gem cache"
 rm -rf /var/lib/gems/*/cache/*
 

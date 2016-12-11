@@ -1,6 +1,6 @@
 {
     "_comment": "Ubuntu CD install",
-    
+
     "variables": {
         "user": "ubuntu",
         "password": "ubuntu",
@@ -9,7 +9,7 @@
         "disk_size": "10000",
         "headless": "true",
         "upgrade": "no",
-        "iso_url": "http://releases.ubuntu.com/16.04/ubuntu-16.04.1-server-amd64.iso", 
+        "iso_url": "http://releases.ubuntu.com/16.04/ubuntu-16.04.1-server-amd64.iso",
         "iso_checksum": "29a8b9009509b39d542ecb229787cdf48f05e739a932289de9e9858d7c487c80",
         "pressed": "1604.preseed"
     },
@@ -25,6 +25,7 @@
             "disk_interface": "scsi",
             "net_device": "e1000",
             "disk_size": "{{user `disk_size`}}",
+            "disk_compression": true,
             "output_directory": "output-ubuntu-{{user `name`}}-{{user `version`}}",
             "vm_name": "ubuntu-{{user `name`}}-{{user `version`}}.qcow2",
             "iso_url": "{{user `iso_url`}}",
@@ -74,6 +75,8 @@
                 "scripts/packages.sh",
                 "scripts/networking.sh",
                 "scripts/cloud-init.sh",
+                "scripts/swap.sh",
+                "scripts/grub.sh",
                 "scripts/cleanup.sh"
             ]
         }
