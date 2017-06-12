@@ -31,3 +31,11 @@ If proxy is needed on your network configuration edit the ubuntu preseed files a
 ```
 d-i mirror/http/proxy http://YOURPROXY:YOURPORT
 ```
+
+Also  you need to add the proxy to the packer template in the `variables` section or
+pass it with the `-var` packer flag. Anyway you have to edit the pressed file,
+because the Debian/Ubuntu installer does not offer a way to ignore the HTTP packer
+internal webserver to request the pressed file, everything will go via the global
+proxy and the installer will fail to get such file.
+
+
