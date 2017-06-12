@@ -5,10 +5,10 @@
         "user": "ubuntu",
         "password": "ubuntu",
         "name": "xenial",
-        "version": "16.04",
+        "version": "16.04.2",
         "disk_size": "10000",
         "headless": "true",
-        "upgrade": "yes",
+        "upgrade": "no",
         "iso_url": "http://releases.ubuntu.com/16.04/ubuntu-16.04.2-server-amd64.iso",
         "iso_checksum": "737ae7041212c628de5751d15c3016058b0e833fdc32e7420209b76ca3d0a535",
         "pressed": "1604.preseed",
@@ -53,8 +53,8 @@
                 "locale=en_US hostname=ubuntu auto=true ",
                 "keyboard-configuration/layoutcode=us ",
                 "grub-installer/bootdev=/dev/sda ",
-                "mirror/http/proxy={{user `proxy`}} ",
                 "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/{{user `pressed`}} ",
+                "mirror/http/proxy={{user `proxy`}} ",
                 "-- <enter>"
             ]
         }

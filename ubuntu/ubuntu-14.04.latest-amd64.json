@@ -13,7 +13,8 @@
         "upgrade": "yes",
         "iso_url": "http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-amd64/current/images/netboot/mini.iso", 
         "iso_checksum": "7297321c2fa6424417a548c85edd6e98",
-        "pressed": "1404.preseed"
+        "pressed": "1404.preseed",
+        "proxy": ""
     },
     "builders": [
         {
@@ -40,6 +41,7 @@
             "boot_command": [ 
                 "<esc>",
                 "linux initrd=initrd.gz auto=true hostname=ubuntu ",
+                "mirror/http/proxy={{user `proxy`}} ",
                 "url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/{{user `pressed`}} ",
                 "-- <enter>"
             ]
@@ -56,7 +58,8 @@
                 "UBUNTU_VERSION={{user `version`}}",
                 "UBUNTU_UPGRADE={{user `upgrade`}}",
                 "DEBIAN_FRONTEND=noninteractive",
-                "HTTP_SERVER_URL=http://{{ .HTTPIP }}:{{ .HTTPPort }}/"
+                "HTTP_SERVER_URL=http://{{ .HTTPIP }}:{{ .HTTPPort }}/",
+                "http_proxy={{user `proxy`}}"
             ],
             "scripts": [
                 "scripts/update.sh",
