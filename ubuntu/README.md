@@ -23,3 +23,11 @@ updated.
 ## Software pre-installed
 
 Look in scripts/packages.sh
+
+
+## Proxy
+
+If proxy is needed on your network configuration edit the ubuntu preseed files and add:
+```
+d-i mirror/http/proxy http://YOURPROXY:YOURPORT
+```
